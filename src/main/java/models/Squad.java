@@ -1,73 +1,94 @@
 package models;
+
+
+
 import java.util.ArrayList;
 
+import java.util.List;
+
 public class Squad {
-
-    private int id;
-    private int maxSize;
+    private int squadId;
     private String name;
-    private String cause;
-    private ArrayList<Hero> heroes;
-    public static ArrayList<Squad> squads=new ArrayList<Squad>();
+    private String squadCause;
+    private int maxSize;
+    private static ArrayList<Squad> instances = new ArrayList<>();
+    private static ArrayList<Hero> myHeroes = new ArrayList<>();
+    private List<Hero> squadHeroes = new ArrayList<>();
 
-    public Squad(int maxSize, String name, String cause, ArrayList<Hero> heroes) {
-
-        this.maxSize = maxSize;
-        this.name = name;
-        this.cause = cause;
-        this.heroes = heroes;
-        squads.add(this);
-        this.id=squads.size();
-    }
-
-    public static ArrayList<Squad> getSquads() {
-        return squads;
-    }
-
-    public ArrayList<Hero> getHeroes() {
-        return heroes;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void deleteSquad(){
-        squads.remove(id-1);
-    }
-
-
-
-    public static void clearAll(){
-        squads.clear();
-    }
-
-    public static Squad findById(int id){
-        try {
-            return squads.get(id-1);
-        } catch (IndexOutOfBoundsException exception) {
-            return null;
-        }
+    public Squad(String squad_name, String squad_cause) {
+        name = squad_name;
+//        maxSize = size;
+        squadCause = squad_cause;
+        this.myHeroes = new ArrayList<>();
+        instances.add(this);
+        this.squadId = instances.size();
 
     }
 
-    public int getId() {
-        return id;
+    public static List<Squad> all() {
+
+        return instances;
     }
 
-    public int getMaxSize() {
-        return maxSize;
+    public static void deleteAll() {
+        instances.clear();
     }
 
-    public String getName() {
+    public int getSquadId() {
+        return squadId;
+    }
+
+    public static Squad findById(int id) {
+        return instances.get(id - 1);
+    }
+
+    public String getSquadName() {
         return name;
     }
 
+    public boolean checkForMaxMembers() {
+        return myHeroes.size() <= this.maxSize;
+    }
+
     public String getCause() {
-        return cause;
+        return this.squadCause;
+    }
+
+    public static ArrayList<Squad> getAll() {
+        return instances;
+    }
+
+    public ArrayList<Hero> getMyHeroes() {
+        return myHeroes;
+    }
+
+    public List<Hero> getSquadHeroes() {
+        return this.squadHeroes;
+    }
+
+    public boolean doesHeroExist(Hero hero) {
+        int counter = 0;
+        for (Hero mHero : myHeroes) {
+            if (mHero.getName().equals(hero.getName())) {
+                counter++;
+            }
+        }
+
+        return counter != 1;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public static void clearAllSquads() {
+        instances.clear();
+    }
+
+    public ArrayList<Hero> getHeroes() {
+        return myHeroes;
+    }
+
+    public void addHero(Hero myHero) {
     }
 }
-Footer
-        © 2023 GitHub, Inc.
-        Footer navigation
-        Terms

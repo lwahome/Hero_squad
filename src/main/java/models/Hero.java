@@ -2,87 +2,80 @@ package models;
 
 import java.util.ArrayList;
 
+
 public class Hero {
+
     private String name;
+    private int heroAge;
+    private String heroAbility;
+    private String heroWeakness;
+    private String heroSquad;
     private int id;
-    private int age;
-    private String powers;
-    private  String weakness;
-    private int defence;
-    private int attack;
-    private boolean occupied;
-    private static ArrayList<Hero> heroes=new ArrayList<Hero>();
+    private static ArrayList<Hero> instances = new ArrayList<Hero>();
 
-    public Hero(String name, int age, String powers, String weakness, int defence, int attack) {
+    public Hero(String name, int age, String ability, String weakness,String heroSquad){
         this.name = name;
-        this.age = age;
-        this.powers = powers;
-        this.weakness = weakness;
-        this.defence = defence;
-        this.attack = attack;
-        heroes.add(this);
-        this.id=heroes.size();
-    }
-
-    public static ArrayList<Hero> getHeroes() {
-        return heroes;
-    }
-
-    public void updateHero(boolean occupied){
-        this.occupied=occupied;
-    }
-
-    public void deleteHero(){
-        heroes.remove(id-1);
-    }
-
-
-    public static Hero findById(int id){
-        try {
-            return heroes.get(id-1);
-        } catch (IndexOutOfBoundsException exception) {
-            return null;
-        }
-
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public static void clearAll(){
-        heroes.clear();
+        this.heroAge = age;
+        this.heroAbility = ability;
+        this.heroWeakness = weakness;
+        this.heroSquad=heroSquad;
+        this.instances.add(this);
+        this.id = instances.size();
     }
 
     public String getName() {
         return name;
     }
-
-    public int getId() {
-        return id;
+    public void setName(String heroName) {
+        this.name = heroName;
     }
 
-    public int getAge() {
-        return age;
+    public int getHeroAge() {
+        return this.heroAge;
     }
 
-    public String getPowers() {
-        return powers;
+
+    public String getHeroAbility() {
+        return heroAbility;
     }
 
-    public String getWeakness() {
-        return weakness;
+    public void setHeroAge(int heroAge) {
+        this.heroAge = heroAge;
     }
 
-    public int getDefence() {
-        return defence;
+    public void setHeroAbility(String heroAbility) {
+        this.heroAbility = heroAbility;
     }
 
-    public int getAttack() {
-        return attack;
+    public void setHeroWeakness(String heroWeakness) {
+        this.heroWeakness = heroWeakness;
     }
 
-    public boolean isOccupied() {
-        return occupied;
+    public void setHeroSquad(String heroSquad) {
+        this.heroSquad = heroSquad;
+    }
+
+    public String getHeroWeakness() {
+        return heroWeakness;
+    }
+
+
+    public static ArrayList<Hero> getAll() {return instances;}
+    public static void clearAllHeroes(){instances.clear();}
+    public int getId(){return id;}
+    public static void clearHeroes() {
+        instances.clear();
+    }
+    public static Hero findById(int id) {
+        return instances.get(id - 1);
+    }
+    public void deleteHero(){
+        instances.remove(id - 1);
+    }
+
+//    public String getHeroName() {
+
+    public String getHeroSquad() {
+        return heroSquad;
     }
 }
